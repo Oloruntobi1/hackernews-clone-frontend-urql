@@ -5,18 +5,16 @@ import { useMutation } from 'urql'
 import { VOTE_MUTATION } from "../mutations/vote-mutation"
 
 export const Link = ({index, link}) => {
-    const isLoggedIn = !!getToken()
-    
+    const isLoggedIn = getToken();
 
     const [state, executeMutation] = useMutation(VOTE_MUTATION);
-
+  
     const upvote = React.useCallback(() => {
       if (!state.fetching) {
         executeMutation({ linkId: link.id });
       }
-    }, [state.fetching, executeMutation, link.id]);
-      
-    
+    }, [state.fetching, link, executeMutation]);
+  
     return (
       <div className="flex mt2 items-start">
         <div className="flex items-center">
@@ -40,5 +38,6 @@ export const Link = ({index, link}) => {
           </div>
         </div>
       </div>
-    )
+    );
   }
+  

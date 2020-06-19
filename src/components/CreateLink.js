@@ -1,32 +1,18 @@
-import React, { useState, useCallback } from 'react'
+import React  from 'react'
 import { useMutation } from "urql"
 import { POST_MUTATION } from "../mutations/post-mutation"
 
 export const CreateLink = props => {
-  const [description, setDescription] = useState('')
-  const [url, setUrl] = useState('')
+    const [description, setDescription] = React.useState('');
+  const [url, setUrl] = React.useState('');
 
+  const [state, executeMutation] = useMutation(POST_MUTATION);
 
-
-    const [ state, executeMutation ] = useMutation(POST_MUTATION)
-
-   
-  
-//   const submit = useCallback(() => {
-//     // ... you'll implement this 🔜
-
-
-
-
-const submit = useCallback(() => {
-   
+  const postMutation = React.useCallback(() => {
     executeMutation({ url, description }).then(() => {
-        props.history.push('/')
-      })
-  }, [executeMutation, url, description])
-  
-
-
+      props.history.push('/new/1');
+    });
+  }, [url, description, executeMutation, props.history]);
 
   return (
     <div>
@@ -46,11 +32,14 @@ const submit = useCallback(() => {
           placeholder="The URL for the link"
         />
       </div>
-      <button  disabled={state.fetching} onClick={submit}>
+      <button
+        disabled={state.fetching}
+        onClick={postMutation}
+      >
         Submit
       </button>
     </div>
-  )
-}
+  );
+};
 
 // export default CreateLink

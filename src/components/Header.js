@@ -1,9 +1,9 @@
-import React from 'react'
-import { withRouter } from 'react-router'
-import { Link } from 'react-router-dom'
-import { getToken, deleteToken } from '../token'
+import React from "react";
+import { withRouter } from "react-router";
+import { Link } from "react-router-dom";
+import { getToken, deleteToken } from "../token";
 
-const Header = props => {
+const Header = (props) => {
   const isLoggedIn = !!getToken();
 
   return (
@@ -14,9 +14,13 @@ const Header = props => {
           new
         </Link>
         <div className="ml1">|</div>
-    <Link to="/search" className="ml1 no-underline black">
-      search
-    </Link>
+        <Link to="/top" className="ml1 no-underline black">
+          top
+        </Link>
+        <div className="ml1">|</div>
+        <Link to="/search" className="ml1 no-underline black">
+          search
+        </Link>
         {isLoggedIn && (
           <div className="flex">
             <div className="ml1">|</div>
@@ -26,14 +30,13 @@ const Header = props => {
           </div>
         )}
       </div>
-
       <div className="flex flex-fixed">
         {isLoggedIn ? (
           <div
             className="ml1 pointer black"
             onClick={() => {
-              deleteToken()
-              props.history.push('/')
+              deleteToken();
+              props.history.push("/");
             }}
           >
             logout
@@ -45,7 +48,6 @@ const Header = props => {
         )}
       </div>
     </div>
-  )
+  );
 }
-
-export default withRouter(Header)
+export default withRouter(Header);
