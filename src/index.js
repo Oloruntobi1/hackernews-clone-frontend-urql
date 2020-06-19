@@ -17,7 +17,7 @@ const client = new Client({
 
 
 ReactDOM.render(
-  <Provider>
+  <Provider value={client}>
     <React.StrictMode>
     <App />
   </React.StrictMode>
