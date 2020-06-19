@@ -20,7 +20,9 @@ export const CreateLink = props => {
 
 const submit = useCallback(() => {
    
-    executeMutation({ url, description })
+    executeMutation({ url, description }).then(() => {
+        props.history.push('/')
+      })
   }, [executeMutation, url, description])
   
 
